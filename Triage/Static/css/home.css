@@ -1,0 +1,20 @@
+.list-group {
+    background-color: hsl(312, 33%, 97%);
+    border-radius: 10px;
+    padding: 10px;
+}
+.list-group-item {
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+.list-group-item:hover {
+    background-color: hsl(180, 96%, 62%);
+    transition: background-color 0.3s ease;
+}
+.nav-link {
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    background-color: rgb(66, 151, 220);
+    border-radius: 5px;
+}

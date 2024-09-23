@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Signos Vitales - IPSoft{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Barra lateral de navegación -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <div class="position-sticky pt-3">
+                <div class="list-group list-group-triage">
+                    <a href="{% url 'inicio' %}" class="list-group-item list-group-item-action">Triage Inicio</a>
+                    <a href="#" class="list-group-item list-group-item-action active">Signos Vitales</a>
+                    <!-- Otros enlaces de navegación -->
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Signos Vitales</h1>
+            </div>
+
+            <!-- Formulario de Signos Vitales -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Registrar Signos Vitales</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="paciente">Paciente</label>
+                                <select class="form-control" id="paciente" name="paciente" required>
+                                    <option value="">Seleccione un paciente</option>
+                                    {% for paciente in pacientes %}
+                                        <option value="{{ paciente.id }}">{{ paciente.nombre }} {{ paciente.apellido }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="presion_arterial_sistolica">Presión Arterial Sistólica</label>
+                                <input type="number" class="form-control" id="presion_arterial_sistolica" name="presion_arterial_sistolica" min="0" max="300" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="presion_arterial_diastolica">Presión Arterial Diastólica</label>
+                                <input type="number" class="form-control" id="presion_arterial_diastolica" name="presion_arterial_diastolica" min="0" max="200" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="frecuencia_cardiaca">Frecuencia Cardíaca</label>
+                                <input type="number" class="form-control" id="frecuencia_cardiaca" name="frecuencia_cardiaca" min="0" max="300" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="frecuencia_respiratoria">Frecuencia Respiratoria</label>
+                                <input type="number" class="form-control" id="frecuencia_respiratoria" name="frecuencia_respiratoria" min="0" max="100" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="temperatura">Temperatura</label>
+                                <input type="number" step="0.1" class="form-control" id="temperatura" name="temperatura" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="saturacion_oxigeno">Saturación de Oxígeno</label>
+                                <input type="number" class="form-control" id="saturacion_oxigeno" name="saturacion_oxigeno" min="0" max="100" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Signos Vitales</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tabla de Signos Vitales -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>Registros de Signos Vitales</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Fecha y Hora</th>
+                                    <th>Presión Arterial</th>
+                                    <th>Frecuencia Cardíaca</th>
+                                    <th>Frecuencia Respiratoria</th>
+                                    <th>Temperatura</th>
+                                    <th>Saturación O2</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for signo in signos_vitales %}
+                                <tr>
+                                    <td>{{ signo.paciente.nombre }} {{ signo.paciente.apellido }}</td>
+                                    <td>{{ signo.fecha_hora }}</td>
+                                    <td>{{ signo.presion_arterial_sistolica }}/{{ signo.presion_arterial_diastolica }}</td>
+                                    <td>{{ signo.frecuencia_cardiaca }}</td>
+                                    <td>{{ signo.frecuencia_respiratoria }}</td>
+                                    <td>{{ signo.temperatura }}</td>
+                                    <td>{{ signo.saturacion_oxigeno }}%</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-info">Ver</a>
+                                        <a href="#" class="btn btn-sm btn-warning">Editar</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="8">No hay registros de signos vitales.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Aquí puedes agregar JavaScript adicional si es necesario
+</script>
+{% endblock %}

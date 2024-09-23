@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio Triage{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<h1>TRIAGE</h1>
+
+<h3>Registar Signos Vitales</h3>
+
+<button>
+    <a href="{% url 'registrar_signos_vitales' %}">Registrar</a>
+</button>
+
+{% endblock %}
