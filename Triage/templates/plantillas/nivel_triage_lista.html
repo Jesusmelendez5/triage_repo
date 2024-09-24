@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Niveles de Triage - IPSoft{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Niveles de Triage</h1>
+    <ul class="list-group">
+        {% for nivel in niveles %}
+            <li class="list-group-item">
+                <h5 style="color: {{ nivel.color }}">{{ nivel.nombre }}</h5>
+                <p>{{ nivel.descripcion }}</p>
+                <a href="{% url 'nivel_triage_detalle' nivel.pk %}" class="btn btn-primary">Ver detalles</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No hay niveles de triage disponibles.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

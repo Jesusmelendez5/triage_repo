@@ -1,14 +1,11 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect,get_object_or_404
+from .models import SignosVitales, Paciente,NivelTriage
+from django.http import HttpResponse
+from django.contrib import messages
 # Create your views here.
 
 def  triage_inicio(request):
     return render(request, 'inicio.html')  
-
-from django.shortcuts import render, redirect
-from .models import SignosVitales, Paciente
-from django.http import HttpResponse
-from django.contrib import messages
 
 def registrar_signos_vitales(request):
     if request.method == 'POST':
@@ -52,3 +49,12 @@ def registrar_signos_vitales(request):
         'signos_vitales': signos_vitales,
     })
 
+# Vista para listar los niveles de triage
+def nivel_triage_lista(request):
+    niveles = NivelTriage.objects.all()
+    return render(request, 'triage/nivel_triage_lista.html', {'niveles': niveles})
+
+# Vista para ver los detalles de un nivel de triage
+def nivel_triage_detalle(request, pk):
+    nivel = get_object_or_404(NivelTriage, pk=pk)
+    return render(request, 'triage/nivel_triage_detalle.html', {'nivel': nivel})
