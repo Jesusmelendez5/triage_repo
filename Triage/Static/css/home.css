@@ -18,3 +18,8 @@
     background-color: rgb(66, 151, 220);
     border-radius: 5px;
 }
+.btn-primary:hover{
+    background-color: #14d30e;
+    border-color: #007bff;
+    color: #fff;
+}
