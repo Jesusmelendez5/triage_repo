@@ -28,7 +28,7 @@ class SignosVitales(models.Model):
 class NivelTriage(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
-    color = models.CharField(max_length=20)
+    color = models.CharField(max_length=50, choices=[('R', 'Rojo'), ('N', 'Naranja'), ('A', 'Amarillo'),('V','Verde'),('Az','Azul')])
     tiempo_maximo_atencion = models.IntegerField(help_text="Tiempo máximo de atención en minutos")
 
     def __str__(self):
