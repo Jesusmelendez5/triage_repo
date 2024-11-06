@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'IPSoft.wsgi.application'
 DATABASES ={
 	'default':{
 	'ENGINE': 'django.db.backends.mysql',
-	'NAME': 'prueba',
+	'NAME': ' ipssena',
   	'USER': 'root',
-  	'PASSWORD': '1234',
+  	'PASSWORD': '12345',
   	'HOST': 'localhost',
   	'PORT': ''
 
